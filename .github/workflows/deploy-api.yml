@@ -1,4 +1,4 @@
-name: Deploy postgresql api
+name: Deploy  mysql-api
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
       - run: echo 'hello world ...'
       - run: ls -la
       - run: touch .env
-      - run: echo 'DEV_DATABASE_URL:${{secrets.PG_CONN}}' >> .env
+      - run: echo 'DEV_DATABASE_URL:${{secrets.MYSQL_CONN}}' >> .env
       - run: cat .env
       - run: docker build -t giovanni760/pg-restapi:${{github.sha}} .
       - run: docker images
@@ -27,7 +27,7 @@ jobs:
         run:  docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
         
       - name: docker push
-        run:  docker push ${{ secrets.DOCKER_USER}}/pg-restapi:${{github.sha}}   
+        run:  docker push ${{ secrets.DOCKER_USER}}/mysql-restapi:${{github.sha}}   
 
      # - run: docker build -t giovanni760/pg-restapi .
       #- run: docker images
